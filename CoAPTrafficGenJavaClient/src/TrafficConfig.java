@@ -110,14 +110,15 @@ public class TrafficConfig {
 	}
 	public void setDecimalSetting(Settings setting, Float value) {
 		switch (setting) {
-			case TEST_INTERMISSION:            test_intermission = value;
-			case COAP_ACK_RANDOM_FACTOR:       coap_ack_random_factor = value;
+			case TEST_INTERMISSION:            test_intermission = value; break; 
+			case COAP_ACK_RANDOM_FACTOR:       coap_ack_random_factor = value; break; 
 			case TRAFFIC_MAXSENDTIME:          if (traffic_type.equals("ONOFF_SOURCE"))
 				                                   traffic_onoff_maxsendtime = value;
 				                               else
-				                            	   traffic_constant_maxsendtime = value;
-			case TRAFFIC_BURST_TIME:           traffic_burst_time = value;
-			case TRAFFIC_IDLE_TIME:            traffic_idle_time = value;
+				                            	   traffic_constant_maxsendtime = value; 
+											   break;
+			case TRAFFIC_BURST_TIME:           traffic_burst_time = value; break; 
+			case TRAFFIC_IDLE_TIME:            traffic_idle_time = value; break;
 			default:                           return;
 		}
 	}
@@ -142,20 +143,20 @@ public class TrafficConfig {
 	}
 	public void setIntegerSetting(Settings setting, Integer value) {
 		switch (setting) {
-			case TEST_SERVERPORT:              test_serverport = value;
-			case TEST_TESTPORT:                test_testport = value;
-			case TEST_REPEATS:                 test_repeats = value;
-			case TEST_PARALLELTRANSFERS:       test_paralleltransfers = value;
-			case TEST_NTPPORT:                 test_ntpport = value;
-			case COAP_ACK_TIMEOUT:             coap_ack_timeout = value;
-			case COAP_MAX_RETRANSMIT:          coap_max_retransmit = value;
-			case COAP_NSTART:                  coap_nstart = value;
-			case TRAFFIC_MAXMESSAGES:          traffic_maxmessages = value;
-			case TRAFFIC_NRTHREADS:			   traffic_nrthreads = value;
-			case TRAFFIC_RATE:                 traffic_rate = value;
-			case TRAFFIC_MESSAGESIZE:          traffic_messagesize = value;
-			case TRAFFIC_FILESIZE:             traffic_filesize = value;
-			case TRAFFIC_BLOCKSIZE:            traffic_blocksize = value;
+			case TEST_SERVERPORT:              test_serverport = value; break;
+			case TEST_TESTPORT:                test_testport = value; break;
+			case TEST_REPEATS:                 test_repeats = value; break;
+			case TEST_PARALLELTRANSFERS:       test_paralleltransfers = value; break;
+			case TEST_NTPPORT:                 test_ntpport = value; break;
+			case COAP_ACK_TIMEOUT:             coap_ack_timeout = value; break;
+			case COAP_MAX_RETRANSMIT:          coap_max_retransmit = value; break;
+			case COAP_NSTART:                  coap_nstart = value; break;
+			case TRAFFIC_MAXMESSAGES:          traffic_maxmessages = value; break;
+			case TRAFFIC_NRTHREADS:			   traffic_nrthreads = value; break;
+			case TRAFFIC_RATE:                 traffic_rate = value; break;
+			case TRAFFIC_MESSAGESIZE:          traffic_messagesize = value; break;
+			case TRAFFIC_FILESIZE:             traffic_filesize = value; break;
+			case TRAFFIC_BLOCKSIZE:            traffic_blocksize = value; break;
 			default:                           return;
 		}
 	}
@@ -172,12 +173,12 @@ public class TrafficConfig {
 	}
 	public void setStringSetting(Settings setting, String value) {
 		switch (setting) {
-			case META_AUTHOR:                  meta_author = value;
-			case META_TITLE:                   meta_title = value;
-			case TEST_SERVER:                  test_server = value;
-			case COAP_MESSAGETYPE:             coap_messagetype = value;
-			case TRAFFIC_TYPE:                 traffic_type = value;
-			case TRAFFIC_MODE:                 traffic_mode = value;
+			case META_AUTHOR:                  meta_author = value; break;
+			case META_TITLE:                   meta_title = value; break;
+			case TEST_SERVER:                  test_server = value; break;
+			case COAP_MESSAGETYPE:             coap_messagetype = value; break;
+			case TRAFFIC_TYPE:                 traffic_type = value; break;
+			case TRAFFIC_MODE:                 traffic_mode = value; break;
 			default:                           return;
 		}
 	}

@@ -7,13 +7,11 @@ public class Generator {
 	private final static int NR_THREADS = 1;
 	private static String ServerIP = "";
 	private static int ServerPort = 5683;
-	private final static int MaxMsgSize = 1400;
-	private final static float SimulationTime = 5.0f;
+	private static int MaxMsgSize = 1400;
+	private final static float SimulationTime = 2.0f;
 	private final static String MsgType = "CON";
 	private static TrafficConfig config;
 	
-	static int interval;
-	static Timer timer;
 
 	public static void main(String[] args) {
 
@@ -39,27 +37,6 @@ public class Generator {
 			for (int i = 0; i < NR_THREADS; i++) {
 				new SendDataThread(i + 1, config).start();
 			}
-			
-			int delay = 0;
-		    int period = 1000;
-		    timer = new Timer();
-		    interval = (int)SimulationTime;
-        	System.out.println("Time: " + interval);
-		    timer.scheduleAtFixedRate(new TimerTask() {
-		        public void run() {
-		        	System.out.println("Time: " + setInterval());
-		        }
-		    }, delay, period);
-			
 		}
-	}
-	
-	private static final int setInterval() {
-	    if (interval == 0) {
-	        timer.cancel();
-	        System.out.println("Time out, stopping client");
-	        System.exit(-1);
-	    }
-	    return --interval;
-	}
+	}	
 }

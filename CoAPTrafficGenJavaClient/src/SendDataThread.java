@@ -1,13 +1,13 @@
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
-
-import org.omg.CORBA.Environment;
 
 import ch.ethz.inf.vs.californium.coap.CoAP;
 import ch.ethz.inf.vs.californium.coap.Request;
@@ -42,6 +42,12 @@ public class SendDataThread extends Thread {
 		try {
 			CoAPEndpoint control = new CoAPEndpoint(config.toNetworkConfig());
 			control.start();
+			
+			if(ThreadNr == 1) { //Start timer when first thread has started sending
+				float time = config.getDecimalSetting(Settings.TRAFFIC_MAXSENDTIME);
+				new GenTimer((int)time, 0, 1000).Start();
+			}
+			
 			SendData(control);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -71,7 +77,7 @@ public class SendDataThread extends Thread {
 			int payloadsize = config.getIntegerSetting(Settings.TRAFFIC_MESSAGESIZE);
 			//Log.i("THREAD", this.getId() + " Sending POST: - CoAP: "+ dataEndpoint.getAddress().getPort());
 			Request test = Request.newPost();
-			String testURI =String.format(
+			String testURI = String.format(
 					//"coap://%1$s:%2$d/control?time=%3$s",
 					"coap://%1$s:%2$d/testing",
 					config.getStringSetting(Settings.TEST_SERVER),
@@ -82,8 +88,8 @@ public class SendDataThread extends Thread {
 			test.setType(type);
 			test.setPayload(PayloadGenerator.generateRandomData(random.nextLong(), payloadsize));//TrafficConfig.networkConfigToStringList(config.toNetworkConfig()));
 			test.send(dataEndpoint);
-			nrPackets++;
 			Response response = test.waitForResponse();
+			nrPackets++;
 			totalRTT = totalRTT + response.getRTT();
 			token = response.getTokenString();
 			//Log.i("THREAD", ThreadNr + " Got reponse on token: " + token + " : " + response.toString());
@@ -96,7 +102,8 @@ public class SendDataThread extends Thread {
 			File subDir = new File(appRoot, "logs");
 			File myFile = new File(subDir, "/Test-"+ config.getIntegerSetting(Settings.TRAFFIC_NRTHREADS) + "Thread(s)-"+ThreadNr+".txt");
 			myFile.createNewFile();
-			FileOutputStream fOut = new FileOutputStream(myFile);
+			
+			/*FileOutputStream fOut = new FileOutputStream(myFile);
 			OutputStreamWriter myOutWriter = new OutputStreamWriter(fOut);
 			myOutWriter.append("-------------------------------------------------\n");
 			myOutWriter.append("Nr of packets sent: " + nrPackets+ "\n");
@@ -104,7 +111,16 @@ public class SendDataThread extends Thread {
 			myOutWriter.append("Avg RTT: " + (totalRTT / nrPackets) + "\n");
 			myOutWriter.append("-------------------------------------------------\n");
 			myOutWriter.close();
-			fOut.close();
+			fOut.close();*/
+			
+			Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(myFile), "utf-8"));
+		    writer.append("-------------------------------------------------\n");
+		    writer.append("Nr of packets sent: " + nrPackets+ "\n");
+		    writer.append("Total RTT: " + totalRTT + "\n");
+		    writer.append("Avg RTT: " + (totalRTT / nrPackets) + "\n");
+		    writer.append("-------------------------------------------------\n");
+			writer.close();
+			
 
 		} catch (Exception e) {
 			//Log.e("THREAD", e.getMessage());
