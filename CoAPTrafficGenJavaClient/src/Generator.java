@@ -1,5 +1,3 @@
-import java.util.Timer;
-import java.util.TimerTask;
 
 
 public class Generator {
@@ -8,7 +6,7 @@ public class Generator {
 	private static String ServerIP = "";
 	private static int ServerPort = 5683;
 	private static int MaxMsgSize = 1400;
-	private final static float SimulationTime = 2.0f;
+	private final static float SimulationTime = 4.0f;
 	private final static String MsgType = "CON";
 	private static TrafficConfig config;
 	

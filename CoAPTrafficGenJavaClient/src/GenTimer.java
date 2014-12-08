@@ -17,7 +17,6 @@ public class GenTimer {
 	
 	public void Start(){
 	    timer = new Timer();
-    	System.out.println("Time: " + interval);
 	    timer.scheduleAtFixedRate(new TimerTask() {
 	        public void run() {
 	        	System.out.println("Time: " + setInterval());
