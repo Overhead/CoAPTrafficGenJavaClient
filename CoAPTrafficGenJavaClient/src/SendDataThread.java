@@ -87,7 +87,7 @@ public class SendDataThread extends Thread {
 			totalRTT = totalRTT + response.getRTT();
 			token = response.getTokenString();
 			
-			File root = new File(System.getProperty("user.home"));
+			/*File root = new File(System.getProperty("user.home"));
 			File appRoot = new File(root, "trafikgeneratorcoap");
 			File subDir = new File(appRoot, "logs");
 			File myFile = new File(subDir, "/Test-"+ config.getIntegerSetting(Settings.TRAFFIC_NRTHREADS) + "Thread(s)-"+ThreadNr+".txt");
@@ -99,7 +99,7 @@ public class SendDataThread extends Thread {
 		    writer.append("Total RTT: " + totalRTT + "\n");
 		    writer.append("Avg RTT: " + (totalRTT / nrPackets) + "\n");
 		    writer.append("-------------------------------------------------\n");
-			writer.close();
+			writer.close();*/
 			
 
 		} catch (Exception e) {
